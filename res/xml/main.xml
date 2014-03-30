@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/general" >
+        <Preference android:title="@string/libInfo" />
+        <Preference android:title="@string/myLib_Record" />
+        <Preference android:title="@string/rmBooking" />
+        <Preference android:title="@string/catalogeSearch" />
+        <Preference android:title="@string/mobileResrc" />
+        <Preference android:title="@string/news_events" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
