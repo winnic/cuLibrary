@@ -16,6 +16,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.jeremyfeinstein.slidingmenu.example.fragments.SearchPanel;
 import com.jeremyfeinstein.slidingmenu.example.fragments.TimeARR;
+import com.jeremyfeinstein.slidingmenu.example.fragments.availCom;
 
 public class CuLibrary extends SherlockPreferenceActivity {
 
@@ -34,8 +35,8 @@ public class CuLibrary extends SherlockPreferenceActivity {
 		String title = pref.getTitle().toString();
 		if (title.equals(getString(R.string.libInfo))) {
 			cls = TimeARR.class;
-		} else if (title.equals(getString(R.string.myLib_Record))) {
-			return false;
+		} else if (title.equals(getString(R.string.available_computers))) {
+			cls = availCom.class;
 		} else if (title.equals(getString(R.string.rmBooking))) {
 			return false;
 		} else if (title.equals(getString(R.string.catalogeSearch))) {

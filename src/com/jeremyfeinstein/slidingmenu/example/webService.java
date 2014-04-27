@@ -18,31 +18,33 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 public class webService {
 	private View ouputText;
 	private int method=1;// for keywords searching
 
-	 public void contextStartBrowerTo_URL(Context context,View v,String url,int searchMethod) {
-		 this.method=searchMethod;
-		 if(method==1){
+	public void contextStartBrowerTo_URL(Context context,View v,String url,int searchMethod) {
+		this.method=searchMethod;
+		if(method==1){
 	    	ouputText=(TextView)v;
-		 }else{
-			 ouputText=v;
-		 }
-	        // Gets the URL from the UI's text field.
-	        ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-	        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-	        if (networkInfo != null && networkInfo.isConnected()) {
-	        	Log.v("testing", "contextStartBrowerTo_URL: network is okay");
-	            new DownloadWebpageTask().execute(url);
-	        } else {
-	        	 if(method==1){
-	        		 ((TextView) ouputText).setText("No network connection available.");
-	        	 }
-	        }
+		}else{
+			ouputText=v;
+		}
+		// Gets the URL from the UI's text field.
+		ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		if (networkInfo != null && networkInfo.isConnected()) {
+			Log.v("testing", "contextStartBrowerTo_URL: network is okay");
+		    new DownloadWebpageTask().execute(url);
+		} else {
+			 if(method==1){
+				 ((SearchPanel) ouputText.getContext()).activateProgressBar(false);
+				 ((TextView) ouputText).setText("No network connection available.");
+	    	 }
 	    }
+	}
 
 	    public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
 	        @Override
@@ -72,7 +74,6 @@ public class webService {
 //	 	        	ouputText.setText(result);	
 	        		 ((SearchPanel) ouputText.getContext()).activateProgressBar(false);
 	        		 if(result!=null){	 	        	
-		 	    
 		 				Intent intent_books = new Intent(ouputText.getContext(), Books.class);
 		 				intent_books.putExtra("booklist_str", result);
 		 				intent_books.putExtra("mPos", 0);
@@ -94,7 +95,7 @@ public class webService {
 	       }
 	    }
 	
-		private String keywordsSearch(String myurl) throws IOException {
+		public static String keywordsSearch(String myurl) throws IOException {
 			try {//!! nerver forget memory leak!!
 				Document doc= Jsoup.connect(myurl).ignoreHttpErrors(true).timeout(100000).get();  
 				//Log.e("testing",doc.toString());
@@ -126,12 +127,12 @@ public class webService {
 				return finalStr;
 				
 			}catch (IOException e) { 
-	            e.printStackTrace(); 
-	        }
-			return null; 
+				return "Cannot connect to library server. Please check your connection.";
+//	            e.printStackTrace(); 
+	        } 
 		}
 		
-		private String bookSearch(String myurl) throws IOException {			 
+		public String bookSearch(String myurl) throws IOException {			 
 			Document doc= Jsoup.connect(myurl).ignoreHttpErrors(true).timeout(100000).get();
 			
 			// get bookname and author and img

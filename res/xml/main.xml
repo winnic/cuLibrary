@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+   >
 
-    <PreferenceCategory android:title="@string/general" >
-        <Preference android:title="@string/libInfo" />
-        <Preference android:title="@string/myLib_Record" />
-        <Preference android:title="@string/rmBooking" />
-        <Preference android:title="@string/catalogeSearch" />
-        <Preference android:title="@string/mobileResrc" />
-        <Preference android:title="@string/news_events" />
+    <PreferenceCategory android:title="@string/general" android:id="@+id/PreferenceCategory" >
+        <Preference android:title="@string/libInfo" android:layout="@layout/preference_icon" android:key="1"/>
+        <Preference android:title="@string/available_computers" android:layout="@layout/preference_icon2" android:key="2"/>
+<!--         <Preference android:title="@string/rmBooking" /> -->
+        <Preference android:title="@string/catalogeSearch" android:layout="@layout/preference_icon3" android:key="3"/>
+<!--         <Preference android:title="@string/mobileResrc" /> -->
+<!--         <Preference android:title="@string/news_events" /> -->
     </PreferenceCategory>
+    
 
 </PreferenceScreen>

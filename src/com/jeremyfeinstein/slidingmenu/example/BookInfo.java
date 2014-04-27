@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import util.FireMissilesDialogFragment;
+import util.ZoomInZoomOut;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,7 +14,11 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
@@ -24,7 +31,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class BookInfo extends Activity {
+public class BookInfo extends FragmentActivity {
 	private ImageView imageview;
 	private String[] sessions = new String[7];
 	private String[] eLinks ;
@@ -81,12 +88,60 @@ public class BookInfo extends Activity {
 			tmp1.setLayoutParams(new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1));
 			tmp2.setLayoutParams(new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
 			tmp3.setLayoutParams(new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1));
+			tmp1.setTextColor(getResources().getColor(R.color.white));
+			tmp2.setTextColor(getResources().getColor(R.color.white));
+			tmp3.setTextColor(getResources().getColor(R.color.white));
 			TableRow row=new TableRow(this);
+//			View view=LayoutInflater.from(getBaseContext()).inflate(R.drawable.roundedtr, row, false);
+//			row.setBackgroundDrawable(getResources().getDrawable(R.drawable.roundedtr));
+			row.setBackgroundResource(R.drawable.roundedtr);
 			row.addView(tmp1);
 			row.addView(tmp2);
 			row.addView(tmp3);
+//			if(i%2==1){
+//				row.setBackgroundColor(Integer.parseInt("1ABC9C", 16)+0xFF000000);
+//			}else{
+//				row.setBackgroundColor(Integer.parseInt("1dd2af", 16)+0xFF000000);
+//			}
 
 			t.addView(row);
+			row.setOnTouchListener(new View.OnTouchListener() {
+				
+				@Override
+				public boolean onTouch(View r, MotionEvent ev) {
+					if(ev.getAction()==1){
+						r.setBackgroundResource(R.drawable.roundedtr);
+					}else{
+						r.setBackgroundResource(R.drawable.roundedtr_pressed);
+					}
+					return false;
+				}
+			});
+			row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                  try
+                  {
+                	TableRow thisRow= (TableRow) v;          	
+                	TextView lib=(TextView) thisRow.getChildAt(0);
+                	String bCode=((String) ((TextView) thisRow.getChildAt(1)).getText()).trim();
+                	Log.v("testing","bCode="+bCode+" and .charAt(1)="+bCode.charAt(1));
+                	Intent I = new Intent(getBaseContext(), ZoomInZoomOut.class);
+	              	I.putExtra("typeOf_floorPlan", "book");
+	              	I.putExtra("lib", "ulib");
+	              	I.putExtra("floor",Character.toString(bCode.charAt(1)));
+                	startActivity(I);
+//                	DialogFragment F= new FireMissilesDialogFragment();
+//                	Bundle args = new Bundle();
+//	        		args.putString("type","img");
+//	        	    args.putString("err", "lib="+lib.getText()+" &bCode="+bCode.getText());
+//	        		F.setArguments(args);
+//                	F.show(getSupportFragmentManager(), "missiles");
+                  }catch(Exception e){
+                      Log.v("testing","BookInfo onclick error : "+e.getMessage());
+                  }
+                }
+            });
 		}
 		
 		eLinks=sessions[6].split(";;");

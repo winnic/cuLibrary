@@ -4,13 +4,15 @@
     <string name="app_name">Library Mobile App</string>
     <string name="openingHours">Opening Hours</string>
     <string name="myLib_Record">My Library Record</string>
+    <string name="available_computers">Available Computers</string>
+    
     <string name="rmBooking">Library Room Booking System</string>
     <string name="catalogeSearch">Catalogue Search</string>
     <string name="mobileResrc">Mobile Resources</string>
     <string name="news_events">News and Events</string>
     
     
-    <string name="libInfo">Libraries Information</string>
+    <string name="libInfo">Library Information</string>
     <string name="openingHours">Opening Hours</string>
     <string name="libContact">Library Contact</string>
 

@@ -29,11 +29,12 @@
         android:textSize="20dip" 
         android:textAlignment="center" />
 
-    <LinearLayout 
-                android:id="@+id/relativeLayout1"
+    <LinearLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginRight="6dp"
+        android:orientation="horizontal" >
 
 	    <EditText
 	        android:id="@+id/keyWords"
@@ -46,44 +47,49 @@
 	        android:hint="@string/keyWords"
 	        android:textSize="20dip" >
 	
-	        <requestFocus />
+<!-- 	        <requestFocus /> -->
 	    </EditText>
 
-	    <Button
-	        android:id="@+id/inputButton"
+	    <ImageView
+	        android:id="@+id/speak"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="50dp"
+	        android:layout_height="100px"
+	        android:layout_marginTop="30dp"
 	        android:layout_alignBottom="@+id/editText1"
 	        android:layout_alignParentRight="true"
 	        android:layout_weight="1"
+	        android:src="@drawable/microphone"
 	        android:text="@string/speak" />
 	    
     </LinearLayout>
 
-   <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+<!--    <RelativeLayout -->
+<!--         android:id="@+id/relativeLayout1" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content"        > -->
     
-	    <Button
-	        android:id="@+id/searchBtn"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"
-	        android:layout_marginRight="16dp"
-	        android:layout_marginTop="10dp"
-	        android:text="@string/search"
-	        android:textAlignment="gravity" />
+<!-- 	    <Button -->
+<!-- 	        android:id="@+id/searchBtn" -->
+<!-- 	        android:layout_width="wrap_content" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:layout_alignParentRight="true" -->
+<!-- 	        android:layout_marginRight="16dp" -->
+<!-- 	        android:layout_marginTop="10dp" -->
+<!-- 	        android:text="@string/search" -->
+<!-- 	        android:textAlignment="gravity" /> -->
 	  
-	</RelativeLayout>
+<!-- 	</RelativeLayout> -->
    
    
    <TextView
        android:id="@+id/output"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:textSize="10sp"
+       android:layout_marginTop="20dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="6dp"
+       android:textColor="#AA99CC"
+       android:textSize="15sp"
        android:textAppearance="?android:attr/textAppearanceMedium" 
        android:scrollbars = "vertical"/>
  

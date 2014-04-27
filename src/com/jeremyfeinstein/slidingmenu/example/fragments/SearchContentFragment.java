@@ -14,11 +14,13 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,11 +32,11 @@ public class SearchContentFragment extends Fragment{
 	
 	private LinearLayout lines;
     private Spinner cuhkLibs_spinner;
-    private Button searchBtn;
+//    private Button searchBtn;
 	private EditText keyWords;
     
     private TextToSpeech tts;
-    private Button inputButton;    
+    private ImageView speakButton;    
     private static final int REQUEST_CODE = 1234;
     private ArrayList<String> matches;
 
@@ -43,7 +45,7 @@ public class SearchContentFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
 		lines= (LinearLayout) inflater.inflate(R.layout.spinner, container, false);
-		lines.setBackgroundResource(android.R.color.white);
+//		lines.setBackgroundResource(android.R.color.white);
 		Log.v("testing", "SearchContentFragment onCreateView ");
 
 		cuhkLibs_spinner=(Spinner) lines.findViewById(R.id.cuhkLibs_spinner);
@@ -55,29 +57,6 @@ public class SearchContentFragment extends Fragment{
 		final TextView output=(TextView) lines.findViewById(R.id.output);
 //		output.setMovementMethod(new ScrollingMovementMethod());
 		
-		searchBtn=(Button) lines.findViewById(R.id.searchBtn);
-		searchBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				((SearchPanel) getActivity()).activateProgressBar(true);
-				String tmp=keyWords.getText().toString();
-				String[] words=tmp.split(" ");
-				String searchKeyWords="";
-				for(int i=0;i<words.length-1;i++){
-					searchKeyWords+=words[i]+"+";
-				}
-				searchKeyWords+=words[words.length-1];
-				Log.v("testing", "searchKeyWords ="+searchKeyWords);
-
-				String url="http://m.library.cuhk.edu.hk/search/?searchtype=Y&searcharg=" +
-						searchKeyWords+
-				"&searchscope=15&submit.x=-376&submit.y=-154";
-				Log.v("testing", "URL = "+url);
-				webService connectToUrl=new webService();
-				connectToUrl.contextStartBrowerTo_URL(getActivity().getBaseContext(),output,url,1);
-				Log.v("testing", "output succeeds");
-			}
-		});
 		
 		keyWords=(EditText) lines.findViewById(R.id.keyWords);
 		
@@ -108,30 +87,30 @@ public class SearchContentFragment extends Fragment{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	////////////////          TTS methods
 	
 	 private void setupTts_to_setSelectedText() {
-       inputButton= (Button) lines.findViewById(R.id.inputButton);
-       inputButton.setOnClickListener(new View.OnClickListener() {
+		speakButton= (ImageView) lines.findViewById(R.id.speak);
+		speakButton.setOnClickListener(new View.OnClickListener() {
            @Override
-           public void onClick(View arg0) {
+           public void onClick(View v) {
            	 Log.v("testing", "inputButton setOnClickListener");
            	 startVoiceRecognitionActivity();
            }
 
        });
+		speakButton.setOnTouchListener(new View.OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent ev) {
+				if(ev.getAction()==1){
+					speakButton.setImageResource(R.drawable.microphone);
+				}else{
+					speakButton.setImageResource(R.drawable.microphone2);
+				}
+				return false;
+			}
+		});
 		
 		tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
 			    @Override
@@ -161,8 +140,8 @@ public class SearchContentFragment extends Fragment{
                 new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
         if (activities.size() == 0)
         {
-        	inputButton.setEnabled(false);
-        	inputButton.setText("Recognizer not present");
+        	speakButton.setEnabled(false);
+//        	inputButton.setText("Recognizer not present");
         } else{
         	 Log.v("testing", "Recognition service is present and num of service = "+activities.size());
         }

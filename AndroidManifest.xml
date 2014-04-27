@@ -19,7 +19,7 @@
         <activity
             android:name=".CuLibrary"
             android:configChanges="orientation|screenSize|screenLayout"
-            android:theme="@style/Theme.Sherlock.Light.DarkActionBar"
+            android:theme="@style/PreferencesTheme"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,12 +38,11 @@
         <activity android:name=".SlidingContent" />
         <activity android:name=".ViewPagerActivity" />
         <activity android:name=".fragments.FragmentChangeActivity" />
-        <activity 
-            android:name=".fragments.TimeARR" 
-            android:theme="@style/MyTheme"/>
-        <activity 
-            android:name=".fragments.SearchPanel" 
-            android:theme="@style/MyTheme"/>
+        <activity android:name="util.ZoomInZoomOut" />
+        <activity android:name=".PullToRefreshGridActivity" android:theme="@style/MyTheme"/>
+        <activity android:name=".fragments.TimeARR" android:theme="@style/MyTheme"/>
+        <activity android:name=".fragments.availCom" android:theme="@style/MyTheme"/>
+        <activity android:name=".fragments.SearchPanel" android:theme="@style/MyTheme"/>
          <activity android:name=".Books" />
          <activity android:name=".BookInfo" />
         <activity android:name=".fragments.ResponsiveUIActivity" />
