@@ -80,7 +80,12 @@ public class ZoomInZoomOut extends SherlockActivity implements OnTouchListener
         		view.setImageResource(R.drawable.g_f);
         	}
         }
+        Log.v("zoom", "imageXY="+view.getPivotX()+","+view.getLeft());
         view.setOnTouchListener(this);
+        view.setScaleType(ImageView.ScaleType.MATRIX);
+        start.set(0, 0);
+        matrix.postTranslate(view.getX(),view.getY());
+        view.setImageMatrix(matrix);
     }
 
     @Override

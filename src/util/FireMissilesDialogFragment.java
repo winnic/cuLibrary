@@ -3,18 +3,18 @@ package util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.jeremyfeinstein.slidingmenu.example.R;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.text.InputType;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.jeremyfeinstein.slidingmenu.example.R;
 
 public class FireMissilesDialogFragment extends DialogFragment {
 	String type=null;
